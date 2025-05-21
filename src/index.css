@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #A9A9A9;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #8B0000; /* Красный цвет */
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    color: #fff; /* Белый текст */
+}
+
+header input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    margin-top: 10px;
+}
+
+main {
+    padding: 20px;
+}
+
+h2 {
+    color: #8B0000; /* Красный заголовок */
+}
+
+.artist-container, .track-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Промежуток между элементами */
+}
+
+.artist, .track {
+    background-color: #000; /* Чёрный фон для элементов */
+    color: #fff; /* Белый текст */
+    padding: 20px;
+    border-radius: 8px;
+    width: 150px; /* Ширина блока */
+    text-align: center;
+}
+
+.artist-image, .track-image {
+    width: 60px; /* Ширина круга */
+    height: 60px; /* Высота круга */
+    border-radius: 50%; /* Круглая форма */
+    background-color: #ccc; /* Серый фон для изображения */
+    margin: 0 auto 10px; /* Центрирование и отступ */
+}
+
+footer {
+    background-color: #8B0000; /* Красный цвет */
+    color: #FFFFFF; /* Белый текст */
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
