@@ -72,7 +72,7 @@ h2 {
 }
 
 .artist:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .artist-image {
@@ -95,7 +95,7 @@ h2 {
 }
 
 .track:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .track-image {
@@ -148,7 +148,7 @@ h2 {
     text-align: left;
 }
 .album:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .album-image {
@@ -171,15 +171,6 @@ h2 {
     color: #ccc;
 }
 
-footer {
-    background-color: #8B0000;
-    color: #FFFFFF;
-    text-align: center;
-    padding: 10px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
 .tabs {
   display: flex;
   justify-content: center;
@@ -239,4 +230,19 @@ footer {
 .footer-column ul li:hover {
   text-decoration: underline;
 }
+.search-link {
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
 
+.search-link:hover {
+  background-color: #333;
+}

@@ -3,6 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 const API_KEY = '3a1a1b0febe6250ae9c051ee143170f6';
 
+/**
+ * Пользовательский хук для разбора параметров запроса из URL.
+ *
+ * @returns Объект URLSearchParams для доступа к параметрам запроса.
+ */
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -18,6 +23,11 @@ const SearchResults = () => {
   const [tracks, setTracks] = useState<any[]>([]);
   const [albums, setAlbums] = useState<any[]>([]);
 
+ /**
+ * Выполняет поиск исполнителей, треков и альбомов на основе поискового термина.
+ *
+ * @param term - Поисковый термин, введенный пользователем.
+ */
   const performSearch = async (term: string) => {
     setLoading(true);
     setError(null);
@@ -50,6 +60,12 @@ const SearchResults = () => {
     }
   };
 
+ /**
+ * Обрабатывает отправку формы поиска.
+ *
+ * Если поисковый термин не пустой, перенаправляет пользователя на страницу
+ * результатов поиска и выполняет поиск с использованием указанного термина.
+ */
   const onSearchSubmit = () => {
     if (searchTerm.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
@@ -165,7 +181,7 @@ const SearchResults = () => {
                 <section>
                   <h2>Альбомы</h2>
                   {albums.length ? (
-                    <div className="album-container" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                    <div className="album-container">
                       {albums.map((album: any, index: number) => {
                         const imageObj = album.image.find((img: any) => img.size === 'medium');
                         const imageUrl = imageObj ? imageObj['#text'] : '';
@@ -274,32 +290,6 @@ const SearchResults = () => {
         )}
       </main>
 
-      <footer className="footer">
-        <div className="footer-column">
-          <h3>О компании</h3>
-          <ul>
-            <li>Наша история</li>
-            <li>Команда</li>
-            <li>Контакты</li>
-          </ul>
-        </div>
-        <div className="footer-column">
-          <h3>Помощь</h3>
-          <ul>
-            <li>Частые вопросы</li>
-            <li>Поддержка</li>
-            <li>Обратная связь</li>
-          </ul>
-        </div>
-        <div className="footer-column">
-          <h3>Аккаунты</h3>
-          <ul>
-            <li>Вход</li>
-            <li>Регистрация</li>
-            <li>Настройки</li>
-          </ul>
-        </div>
-      </footer>
     </div>
   );
 };

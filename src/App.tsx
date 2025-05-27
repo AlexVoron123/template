@@ -33,6 +33,13 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+ /**
+ * Загружает данные с указанного API URL и обновляет состояние.
+ *
+ * @param url - URL API для загрузки данных.
+ * @param setter - Функция-сеттер состояния для обновления данных.
+ * @param loadingSetter - Функция-сеттер состояния для обновления статуса загрузки.
+ */
     const fetchData = async (url: string, setter: React.Dispatch<React.SetStateAction<any[]>>, loadingSetter: React.Dispatch<React.SetStateAction<boolean>>) => {
       try {
         const response = await fetch(url);
@@ -51,6 +58,12 @@ const App: React.FC = () => {
     fetchData(API_URL_TRACKS, setTracks, setLoadingTracks);
   }, []);
 
+/**
+ * Получает URL изображения для исполнителя или трека.
+ *
+ * @param item - Объект исполнителя или трека.
+ * @returns URL изображения или URL по умолчанию.
+ */
   const getImage = (item: Artist | Track): string => {
     const imageObj = item.image.find(img => img.size === 'medium');
     return imageObj ? imageObj['#text'] : 'https://via.placeholder.com/150';
@@ -67,8 +80,8 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          <h1 className="header-title">Музыкальный проект</h1>
+        <header>
+          <h1>Музыкальный проект</h1>
           <Link to="/search">
             <span className="search-link">Поиск</span>
           </Link>
@@ -78,29 +91,25 @@ const App: React.FC = () => {
             <Route path="/" element={
               <>
                 <section className="music-section">
-                  <h2 className="music-section-heading">Популярные исполнители</h2>
-                  <div className="music-tags">
+                  <h2>Популярные исполнители</h2>
+                  <div className="artist-container">
                     {artists.map((artist) => (
-                      <div key={artist.mbid || artist.name} className="music-featured-item">
-                        <div className="music-featured-item-avatar artist">
-                          <img src={getImage(artist)} alt={artist.name} />
-                        </div>
-                        <h3 className="music-featured-item-heading">{artist.name}</h3>
+                      <div key={artist.mbid || artist.name} className="artist">
+                        <div className="artist-image" style={{ backgroundImage: `url(${getImage(artist)})` }}></div>
+                        <p>{artist.name}</p>
                       </div>
                     ))}
                   </div>
                 </section>
                 <section className="music-section">
-                  <h2 className="music-section-heading">Популярные треки</h2>
-                  <div className="music-tags tracks">
+                  <h2>Популярные треки</h2>
+                  <div className="track-container">
                     {tracks.map((track) => (
-                      <div key={track.mbid || track.name} className="music-featured-item track">
-                        <div className="music-featured-item-avatar track">
-                          <img src={getImage(track)} alt={track.name} />
-                        </div>
-                        <div className="music-featured-item-info">
-                          <h3 className="music-featured-item-heading">{track.name}</h3>
-                          <p>Исполнитель: {typeof track.artist === 'string' ? track.artist : track.artist.name}</p>
+                      <div key={track.mbid || track.name} className="track">
+                        <div className="track-image" style={{ backgroundImage: `url(${getImage(track)})` }}></div>
+                        <div className="track-info">
+                          <p className="track-name">{track.name}</p>
+                          <p className="track-artist">Исполнитель: {typeof track.artist === 'string' ? track.artist : track.artist.name}</p>
                         </div>
                       </div>
                     ))}
@@ -111,27 +120,32 @@ const App: React.FC = () => {
             <Route path="/search" element={<Search />} />
           </Routes>
         </main>
-        <footer className="App-footer">
-          <div className="footer-columns">
-            <div className="footer-column">
-              <h4>О компании</h4>
-              <p>Наша история</p>
-            </div>
-            <div className="footer-column">
-              <h4>Помощь</h4>
-              <p>Поддержка</p>
-            </div>
-            <div className="footer-column">
-              <h4>Аккаунты</h4>
-              <p>Настройки</p>
-            </div>
-            <div className="footer-column">
-              <h4>Следите за нами</h4>
-              <p>Instagram</p>
-            </div>
-          </div>
-          <p>© 2023 Музыкальный проект. Все права защищены.</p>
-        </footer>
+        <footer className="footer">
+        <div className="footer-column">
+          <h3>О компании</h3>
+          <ul>
+            <li>Наша история</li>
+            <li>Команда</li>
+            <li>Контакты</li>
+          </ul>
+        </div>
+        <div className="footer-column">
+          <h3>Помощь</h3>
+          <ul>
+            <li>Частые вопросы</li>
+            <li>Поддержка</li>
+            <li>Обратная связь</li>
+          </ul>
+        </div>
+        <div className="footer-column">
+          <h3>Аккаунты</h3>
+          <ul>
+            <li>Вход</li>
+            <li>Регистрация</li>
+            <li>Настройки</li>
+          </ul>
+        </div>
+      </footer>
       </div>
     </Router>
   );
